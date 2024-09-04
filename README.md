@@ -33,6 +33,7 @@ Check out our live demo! 🎬👇
 Before you get started, make sure you have the following:
 
 - 🖥 [Node.js](https://nodejs.org/)
+- 📦 [npm](https://www.npmjs.com/) (usually installed with Node.js)
 - 🔐 [Metamask](https://metamask.io/)
 - 💰 Ethereum wallet with testnet ETH
 
@@ -53,13 +54,13 @@ Before you get started, make sure you have the following:
 3. **Start the development server**:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
 4. **Deploy the smart contract**:
 
    ```bash
-   truffle migrate --network <network-name>
+   npx hardhat ignition deploy ignition/modules/Cert.js --network <network-name>
    ```
 
 ---
