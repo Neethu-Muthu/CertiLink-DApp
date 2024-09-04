@@ -132,12 +132,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 💻 **Happy coding!** 😊
 ```
 
-### Customization Instructions:
-- **Demo Video**: Replace `your-video-id` with the actual ID of your YouTube video.
-- **Replace `your-username`** in image URLs and repository links with your GitHub username.
-- **Add Images**: Make sure the images (`Dapp.png`, `home.png`, `issue.png`, `certificate.png`) are correctly placed in the `assets` folder of your GitHub repository.
-  
-### Additional Tips:
-- **Icons and Emojis**: These are used to make the README lively and more visually engaging.
-- **Clickable Video Thumbnail**: The video section provides a clickable thumbnail that links directly to your demo video.
-- **Screenshots**: Use high-quality screenshots to visually demonstrate the functionality.
