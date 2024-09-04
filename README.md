@@ -105,7 +105,7 @@ Users can verify certificates by entering the ID on the **Home** page. The data 
 ## 🎨 Screenshots
 
 ### 🏠 Home Page
-<img src="https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/home(1).png" alt="Home Page" style="width: 100%; max-width: 600px;"/>
+![Home Page](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/home(1).png)
 
 ### 📝 Issue Certificate Page
 ![Issue Certificate Page](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/issueCert.png)
