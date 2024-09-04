@@ -10,7 +10,7 @@ Welcome to the **Certificate DApp**! 🌟 This decentralized application (DApp) 
 
 Check out our live demo! 🎬👇
 
-[![Watch the video](https://img.youtube.com/vi/your-video-id/maxresdefault.jpg)](https://youtu.be/your-video-id)
+[![Watch the video](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/certiVid-7201959.webm)](https://youtu.be/your-video-id)
 
 ---
 
