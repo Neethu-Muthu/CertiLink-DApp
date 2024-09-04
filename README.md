@@ -1,4 +1,4 @@
-# 🎓 Certificate DApp
+# 🎓 CertiLink DApp: Your Digital Credential Hub
 
 Welcome to the **Certificate DApp**! 🌟 This decentralized application (DApp) provides a seamless, secure, and fun way to issue and verify certificates on the blockchain. Say goodbye to fake certificates and hello to trust and transparency! 🚀
 
