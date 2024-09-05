@@ -104,7 +104,10 @@ Users can verify certificates by entering the ID on the **Home** page. The data 
 
 ## 🎨 Screenshots
 
-### 🏠 CertiLink DApp Images
+### 📸 App Overview
+
+Check out the visual highlights of the CertiLink app:
+
 ![Home Page](UI/src/assets/images/img.jpeg)
 
 
