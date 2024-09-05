@@ -105,7 +105,7 @@ Users can verify certificates by entering the ID on the **Home** page. The data 
 ## 🎨 Screenshots
 
 ### 🏠 Home Page
-![Home Page](UI/src/assets/images/WhatsApp Image 2024-09-06 at 2.12.05 AM.jpeg)
+![Home Page](UI/src/assets/images/img.jpeg)
 
 ### 📝 Issue Certificate Page
 ![Issue Certificate Page](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/issueCert.png)
