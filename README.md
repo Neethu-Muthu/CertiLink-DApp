@@ -44,25 +44,65 @@ Before you get started, make sure you have the following:
    ```bash
    git clone https://github.com/your-username/certificate-dapp.git
    cd certificate-dapp
+   
+2. Install dependencies
 
-2. **Install dependencies**:
+```
+npm install
+```
+```
+npm i hardhat
+```
+```
+npm hardhat compile
+```
+Add a main network to hardhat.config.
+- here im using sepolia and infura 
+- add your api key for your sepolia from infura
+- add your metamask private key 
+eg.
+```
+module.exports = {
+  defaultNetwork:"infurasepolia",
+  networks: {
+    localhost: {
+      url:"http://127.0.0.1:8545/"
+    },
+    infurasepolia: {
+      url :"your api key of infura or any other accounts",
+      accounts:["your metamask private key"]
+    }
+  },
+  solidity: "0.8.20",
+};
+```
+```
+npx hardhat node
+```
+open another terminal in vscode(ctrl+shift+`)
 
-   ```bash
-   npm install
-   ```
+```
+npx hardhat ignition deploy ignition/modules/Cert.js
+``` 
+open another terminal in vscode(ctrl+shift+`)
 
-3. **Start the development server**:
+```
+cd ui
+npm i 
+```
+Go to folder src/SCdata
 
-   ```bash
-   npm run dev
-   ```
-
-4. **Deploy the smart contract**:
-
-   ```bash
-   npx hardhat ignition deploy ignition/modules/Cert.js --network <network-name>
-   ```
-
+- add Abi code to cert.json file
+- add deployed address to deployedaddress.json(deployed address will get after deploying the contract)
+  
+```
+npm run dev
+```
+- connect your metamask
+- issue certificate
+- enter details
+- make payment in metamask
+- after metamask confirm get you certificate by enter your uinique id
 ---
 
 ## 💻 Frontend Overview
