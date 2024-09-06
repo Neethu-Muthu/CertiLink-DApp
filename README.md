@@ -42,7 +42,7 @@ Before you get started, make sure you have the following:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/certificate-dapp.git
+   git clone https://github.com/your-username/CertiLink-DApp.git
    cd certificate-dapp
    
 2. Install dependencies
