@@ -40,8 +40,8 @@ Before you get started, make sure you have the following:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/CertiLink-DApp.git
-   cd certificate-dapp
+   git clone https://github.com/neethu-muthu/CertiLink-DApp.git
+   cd CertiLink_DApp
    
 2. Install dependencies
 
