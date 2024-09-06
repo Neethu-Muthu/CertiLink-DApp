@@ -41,7 +41,7 @@ Before you get started, make sure you have the following:
 
    ```bash
    git clone https://github.com/neethu-muthu/CertiLink-DApp.git
-   cd CertiLink_DApp
+   cd UI
    
 2. Install dependencies
 
