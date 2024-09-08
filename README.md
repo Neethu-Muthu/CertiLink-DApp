@@ -8,7 +8,7 @@ Welcome to the **CertiLink DApp**! 🌟 This decentralized application (DApp) pr
 
 Check out our live demo! 🎬👇
 
-[![Watch the video](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/Untitled%20design.png)](https://drive.google.com/file/d/1gPusH7TBOH1zVztPxTUS8Cd9uzyrp86Y/view?usp=sharing)
+[![Watch the video](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/Untitled%20design.png)](https://drive.google.com/file/d/1_6vBqRGVBXi8S9eJxHmEOTpMXTQD_iaH/view?usp=sharing)
 
 ---
 
