@@ -61,12 +61,12 @@ Add a main network to hardhat.config.
 eg.
 ```
 module.exports = {
-  defaultNetwork:"infurasepolia",
+  defaultNetwork:"alchemy",
   networks: {
     localhost: {
       url:"http://127.0.0.1:8545/"
     },
-    infurasepolia: {
+    alchemy: {
       url :"your api key of infura or any other accounts",
       accounts:["your metamask private key"]
     }
@@ -85,7 +85,7 @@ npx hardhat ignition deploy ignition/modules/Cert.js
 open another terminal in vscode(ctrl+shift+`)
 
 ```
-cd ui
+cd UI
 npm i 
 ```
 Go to folder src/SCdata
