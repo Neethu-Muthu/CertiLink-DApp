@@ -33,7 +33,7 @@ Before you get started, make sure you have the following:
 - 🖥 [Node.js](https://nodejs.org/)
 - 📦 [npm](https://www.npmjs.com/) (usually installed with Node.js)
 - 🔐 [Metamask](https://metamask.io/)
-- 💰 Ethereum wallet with testnet ETH
+- 💰 [Hardhat](https://hardhat.org/)
 
 ### Installation
 
