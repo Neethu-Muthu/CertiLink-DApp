@@ -1,183 +1,173 @@
-# 🎓 CertiLink DApp: Your Digital Credential Hub
+# CertiLink — Blockchain Certificate Management
 
-Welcome to the **CertiLink DApp**! 🌟 This decentralized application (DApp) provides a seamless, secure, and fun way to issue and verify certificates on the blockchain. Say goodbye to fake certificates and hello to trust and transparency! 🚀
+A decentralised application for issuing and verifying academic and professional certificates on Ethereum. Certificates are anchored on-chain via smart contract — verifiable by anyone with a certificate ID, with no central database and no trusted intermediary required.
 
----
-
-## 🎥 Demo Video
-
-Check out our live demo! 🎬👇
-
-[![Watch the video](https://github.com/Neethu-Muthu/Certificate-DApp/blob/main/UI/src/assets/images/Untitled%20design.png)](https://drive.google.com/file/d/1_6vBqRGVBXi8S9eJxHmEOTpMXTQD_iaH/view?usp=sharing)
+**[Watch the demo](https://drive.google.com/file/d/1_6vBqRGVBXi8S9eJxHmEOTpMXTQD_iaH/view?usp=sharing)**
 
 ---
 
-## ✨ Features
+## What This Does
 
-🛠 **Issue Certificates**: Administrators can create certificates for students with course details, grades, and dates.
+Institutions issue certificates by recording certificate data on-chain. Recipients hold a unique certificate ID. Verifiers check authenticity directly against the contract — no login, no API call to a central server, no trust required in the issuer's infrastructure.
 
-🔍 **Verify Certificates**: Verify certificates by simply entering the certificate ID—anyone can do it!
-
-🔐 **Blockchain Security**: Powered by Ethereum, all certificates are stored on the blockchain, ensuring they can't be altered or forged.
-
-🎨 **Beautiful UI**: A sleek, modern interface built with React and styled with Tailwind CSS.
+**Core flows:**
+- **Issuer (Admin)** — issues certificates with candidate name, course, grade, and date via the Issue Certificate page
+- **Holder** — receives a unique certificate ID after issuance
+- **Verifier** — enters certificate ID on the Home page; data is fetched directly from the blockchain
 
 ---
 
-## 🚀 Quick Start
+## Architecture
+
+```
+┌──────────────┐        ┌─────────────────────┐        ┌──────────────┐
+│    Issuer    │──────▶ │   CertiLink.sol      │ ◀───── │   Verifier   │
+│  (React UI)  │ issue  │  (Ethereum / Sepolia) │ query  │  (React UI)  │
+└──────────────┘        └─────────────────────┘        └──────────────┘
+                                  │
+                         stores: cert ID · candidate name
+                         course · grade · date · issuer address
+```
+
+**On-chain:** certificate ID, candidate name, course, grade, issue date, issuer address
+**Off-chain:** UI assets, certificate design templates
+
+---
+
+## Smart Contract
+
+**Network:** Ethereum Sepolia testnet
+**Standard:** Custom certificate registry (no ERC-721 — certificates are records, not transferable tokens)
+
+| Function | Description | Access |
+|---|---|---|
+| `issue(cerid, cname, course, grade, date)` | Records a new certificate on-chain | Admin only |
+| `getCertificate(cerid)` | Returns all certificate fields | Public |
+
+Certificate IDs are human-readable and set by the issuer — no wallet address or transaction hash required to verify.
+
+---
+
+## Key Design Decisions
+
+**Why on-chain storage instead of hash anchoring?**
+For a PoC at this scale, storing certificate fields directly on-chain keeps the verification flow simple — verifiers read the data directly without needing access to an off-chain document. A production system would move to hash anchoring with IPFS for the full document (listed in Future Directions).
+
+**Why not ERC-721?**
+Certificates are not meant to be traded or transferred. An ERC-721 token implies transferable ownership, which is the wrong semantic for a credential. A certificate registry contract with admin-controlled issuance matches the actual trust model.
+
+**Certificate ID as human-readable identifier**
+IDs are designed to be shareable without blockchain knowledge. Verifiers enter an ID like `CERT-2024-CS-001` — no wallet, no transaction hash, no technical knowledge required.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Smart Contract | Solidity 0.8.20 |
+| Contract tooling | Hardhat + Hardhat Ignition |
+| Frontend | React + Vite |
+| Styling | Tailwind CSS |
+| Wallet | MetaMask (ethers.js v6 BrowserProvider) |
+| Network | Ethereum Sepolia (via Infura/Alchemy) |
+
+---
+
+## How to Run
 
 ### Prerequisites
 
-Before you get started, make sure you have the following:
+- Node.js 18+
+- npm
+- MetaMask browser extension
+- Infura or Alchemy account (for Sepolia RPC)
 
-- 🖥 [Node.js](https://nodejs.org/)
-- 📦 [npm](https://www.npmjs.com/) (usually installed with Node.js)
-- 🔐 [Metamask](https://metamask.io/)
-- 💰 [Hardhat](https://hardhat.org/)
+### 1. Clone and install
 
-### Installation
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/neethu-muthu/CertiLink-DApp.git
-   cd UI
-   
-2. Install dependencies
-
-```
+```bash
+git clone https://github.com/neethu-muthu/CertiLink-DApp.git
+cd UI
 npm install
-```
-```
 npm i hardhat
 ```
-```
-npm hardhat compile
-```
-Add a main network to hardhat.config.
-- here im using sepolia and infura 
-- add your api key for your sepolia from infura
-- add your metamask private key 
-eg.
-```
+
+### 2. Configure Hardhat
+
+Edit `hardhat.config.js`:
+
+```javascript
 module.exports = {
-  defaultNetwork:"alchemy",
+  defaultNetwork: "alchemy",
   networks: {
     localhost: {
-      url:"http://127.0.0.1:8545/"
+      url: "http://127.0.0.1:8545/"
     },
     alchemy: {
-      url :"your api key of infura or any other accounts",
-      accounts:["your metamask private key"]
+      url: "YOUR_INFURA_OR_ALCHEMY_RPC_URL",
+      accounts: ["YOUR_METAMASK_PRIVATE_KEY"]
     }
   },
   solidity: "0.8.20",
 };
 ```
-```
+
+> Never commit your private key. Use a `.env` file with `dotenv` in production.
+
+### 3. Compile and deploy
+
+```bash
+npx hardhat compile
 npx hardhat node
 ```
-open another terminal in vscode(ctrl+shift+`)
 
-```
+In a new terminal:
+
+```bash
 npx hardhat ignition deploy ignition/modules/Cert.js
-``` 
-open another terminal in vscode(ctrl+shift+`)
+```
 
-```
-cd UI
-npm i 
-```
-Go to folder src/SCdata
+### 4. Wire up the frontend
 
-- add Abi code to cert.json file
-- add deployed address to deployedaddress.json(deployed address will get after deploying the contract)
-  
-```
+Copy the deployed contract address and ABI into:
+- `src/SCdata/deployedaddress.json` — paste deployed address
+- `src/SCdata/cert.json` — paste ABI from `artifacts/`
+
+### 5. Start the frontend
+
+```bash
 npm run dev
 ```
-- connect your metamask
-- issue certificate
-- enter details
-- make payment in metamask
-- after metamask confirm get you certificate by enter your uinique id
----
 
-## 💻 Frontend Overview
-
-The DApp is designed to be user-friendly and interactive. Here’s what it offers:
-
-- **🏠 Home Page**: Connect your Metamask wallet and easily search for certificates by ID.
-  
-- **📝 Issue Page**: Admins can issue new certificates by filling out a simple form with course details, candidate name, grade, and issue date.
-  
-- **📜 Certificate Page**: Displays detailed certificate information fetched directly from the blockchain.
+Connect MetaMask → issue a certificate → copy the certificate ID → verify on the home page.
 
 ---
 
-## 🎯 Usage Guide
+## Screenshots
 
-### Connect to Metamask
-
-Make sure to connect your Metamask wallet before interacting with the DApp:
-
-```javascript
-const provider = new BrowserProvider(window.ethereum);
-const signer = await provider.getSigner();
-```
-
-### Issue a Certificate
-
-Admins can issue new certificates through the **Issue Certificate** page:
-
-```javascript
-const tx = await instance.issue(cerid, cname, course, grade, date);
-```
-
-### Verify a Certificate
-
-Users can verify certificates by entering the ID on the **Home** page. The data is securely fetched from the blockchain!
+![CertiLink App Overview](UI/src/assets/images/img.jpeg)
 
 ---
 
-## 🎨 Screenshots
+## Future Directions
 
-### 📸 App Overview
-
-Check out the visual highlights of the CertiLink app:
-
-![Home Page](UI/src/assets/images/img.jpeg)
-
-
----
-
-## Future Directions 🚀
-
-CertiLink is set to expand with several key updates, including:
-
-1. **Bulk Certificate Issuance**: Admins will be able to issue multiple certificates in one transaction, streamlining the process.
-2. **Off-chain Storage**: Incorporating off-chain storage solutions like IPFS for certificate metadata to reduce blockchain data load.
-3. **Interoperability**: Enabling certificate verification across multiple DApps for broader credential validation.
-4. **Custom Certificate Designs**: Allow organizations to create certificates using customizable templates.
-5. **Real-time Notifications**: Implement real-time alerts for certificate issuance and verification via email or in-app notifications.
-
-These updates will enhance CertiLink’s scalability, efficiency, and user experience.
+1. **Hash anchoring + IPFS** — move to storing a document hash on-chain with the full certificate PDF on IPFS, reducing gas costs and enabling richer certificate formats
+2. **Bulk issuance** — batch multiple certificate issuances in a single transaction
+3. **Revocation** — add an admin-callable `revoke(cerid)` function with verifier-visible status
+4. **Cross-chain verification** — enable verification across EVM-compatible chains via a shared registry
+5. **Custom certificate templates** — allow organisations to define certificate designs tied to their on-chain identity
 
 ---
 
+## Related Work
 
-## 🤝 Contributing
+This project directly informed the architecture of an enterprise academic credential verification PoC — exploring public blockchain anchoring for diploma and degree verification at institutional scale.
 
-We welcome contributions! 🙌 Feel free to fork this project, open issues, or submit pull requests. Let’s build something amazing together! 🚀
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
+- [Automobile Lifecycle on Hyperledger Fabric](https://github.com/Neethu-Muthu/Automobile-Minifabric-Golang)
+- [SecureBallot — Permissioned voting on Fabric](https://github.com/Neethu-Muthu/SecureBallot-Hyperledger)
 
 ---
 
-💻 **Happy coding!** 😊
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
